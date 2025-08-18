@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI GitHub Finder</title>
+  <link rel="stylesheet" href="styles.css" />
+  
+</head>
+<body>
+  <div class="page active">
+    <div class="auth-container">
+      <h1>Ⱳellcome Da pulla 🥳 </h1>
+
+      <p class="auth-subtitle">sign pannu da nanba</p>
+
+      <form id="loginForm" class="auth-form">
+        <div class="form-field">
+          <label for="username">name podu </label>
+          <input id="username" type="text" autocomplete="username" required />
+        </div>
+        <div class="form-field">
+          <label for="password">Pass aadi</label>
+          <div class="password-input-row">
+            <input id="password" type="password" autocomplete="current-password" required />
+            <button type="button" id="togglePassword" class="toggle-password" aria-label="Show password">Show</button>
+          </div>
+        </div>
+        <div class="form-meta">
+          <label class="remember"><input id="rememberMe" type="checkbox" /> <span>Remember me</span></label>
+        </div>
+        <button type="submit" class="btn-blue">Login pannu</button>
+        <p id="loginError" class="auth-error" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+
+  <script>
+
+    if (localStorage.getItem('loggedIn') === 'true' || sessionStorage.getItem('loggedIn') === 'true') {
+      window.location.replace('index.html');
+    }
+
+    document.getElementById('loginForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      var username = document.getElementById('username').value.trim();
+      var password = document.getElementById('password').value.trim();
+
+      if (!username || !password) {
+        document.getElementById('loginError').textContent = 'Enter username and password';
+        return;
+      }
+
+      // Basic front-end-only login. Replace with real auth later.
+      var remember = document.getElementById('rememberMe').checked;
+      if (remember) {
+        localStorage.setItem('loggedIn', 'true');
+      } else {
+        sessionStorage.setItem('loggedIn', 'true');
+      }
+      window.location.replace('index.html');
+    });
+
+    var toggleBtn = document.getElementById('togglePassword');
+    toggleBtn.addEventListener('click', function () {
+      var pwd = document.getElementById('password');
+      var isHidden = pwd.getAttribute('type') === 'password';
+      pwd.setAttribute('type', isHidden ? 'text' : 'password');
+      toggleBtn.textContent = isHidden ? 'Hide' : 'Show';
+      toggleBtn.setAttribute('aria-label', isHidden ? 'Hide password' : 'Show password');
+    });
+  </script>
+</body>
+</html>
+
